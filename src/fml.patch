@@ -1,0 +1,22 @@
+--- a/mcp/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java	2014-11-28 07:09:54.000000000 -0600
++++ b/mcp/src/minecraft/cpw/mods/fml/common/FMLCommonHandler.java	2014-11-28 07:09:12.000000000 -0600
+@@ -20,6 +20,8 @@
+ import java.util.logging.Level;
+ import java.util.logging.Logger;
+ 
++import org.nashvillecode.mbasic.RunCommand;
++
+ import net.minecraft.command.CommandHandler;
+ import net.minecraft.crash.CrashReport;
+ import net.minecraft.crash.CrashReportCategory;
+@@ -312,6 +314,10 @@
+ 
+     public boolean handleServerStarting(MinecraftServer server)
+     {
++    	// section added by jto 2014-nov-19
++        CommandHandler ch = (CommandHandler) server.getCommandManager();
++        ch.registerCommand(new RunCommand());
++        // end section
+         return Loader.instance().serverStarting(server);
+     }
+ 
