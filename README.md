@@ -27,4 +27,10 @@ But here's what you need to do to get started.
 
 5.  `./gradlew runClient` to run Minecraft with the mod installed.
 
+6.  If you're planning on hacking on this module, you might want to do
+    `./gradlew setupDecompWorkspace`, which
+    decompiles Minecraft to Java sources,
+    and also unzips Minecraft Forge sources from somewhere,
+    and puts them all into `./build/tmp/recompSrc`.
+
 Those last two steps are pretty speculative as I don't have things all set up yet.
