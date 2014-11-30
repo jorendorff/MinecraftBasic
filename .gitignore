@@ -2,3 +2,7 @@
 gradlew
 gradle/**
 .gradle/**
+
+# `./gradlew runClient` creates this directory and stores
+# saved games and stuff in it:
+minecraft-run/**
