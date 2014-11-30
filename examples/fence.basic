@@ -1,0 +1,8 @@
+# This program draws a large square fence around the player's current position.
+
+USE fence
+
+HLIN -30, 30 AT -30
+VLIN -30, 30 AT 30
+HLIN -30, 30 AT 30
+VLIN -30, 30 AT -30
