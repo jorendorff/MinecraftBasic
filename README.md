@@ -21,6 +21,10 @@ But here's what you need to do to get started.
 
 4.  `./gradlew jar` to build the mod.
 
+    The first time you run this, it'll download a ton of software over HTTP
+    that will later run on your computer.
+    Sorry, that's how the Java ecosystem is.
+
 5.  `./gradlew runClient` to run Minecraft with the mod installed.
 
 Those last two steps are pretty speculative as I don't have things all set up yet.
