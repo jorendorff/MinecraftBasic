@@ -3,6 +3,7 @@ package org.nashvillecode.mbasic;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import net.minecraft.block.Block;
 
 /**
  * A statement in a BASIC program. BasicStatements are the main nodes
@@ -20,14 +21,14 @@ public abstract class BasicStatement {
     public abstract void execute(BasicExecutionContext context);
 
     public static class Use extends BasicStatement {
-        public int blockID;
-        public BasicExpr metadata;	
-        public Use(File file, int line, int blockID, BasicExpr metadata) {
-            super(file, line); this.blockID = blockID; this.metadata = metadata;
+        public Block block;
+        public BasicExpr metadata;
+        public Use(File file, int line, Block block, BasicExpr metadata) {
+            super(file, line); this.block = block; this.metadata = metadata;
         }
         public void execute(BasicExecutionContext context) {
             int m = metadata == null ? 0 : metadata.evaluate(context);
-            context.setBlockIDAndMetadata(blockID, m);
+            context.setBlockAndMetadata(block, m);
         }
     }
 

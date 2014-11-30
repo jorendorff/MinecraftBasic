@@ -11,11 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import org.nashvillecode.mbasic.BasicStatement.Hlin;
-import org.nashvillecode.mbasic.BasicStatement.Plot;
-import org.nashvillecode.mbasic.BasicStatement.Up;
-import org.nashvillecode.mbasic.BasicStatement.Vlin;
-
 public class BasicParser {
     private BasicLineReader reader;
     private String[] tokens;
@@ -173,7 +168,7 @@ public class BasicParser {
         return parseCompound();
     }
 
-	
+/*
     private HashMap<String, Item> allItems;
 
     private Item getItemForName(String name) {
@@ -199,12 +194,13 @@ public class BasicParser {
         }
         return allItems.get(name.toLowerCase());
     }
+*/
 
-    private int getBlockIDForName(String name) {
-        // Air isn't exactly a Block or Item, so handle it specially.
-        if (name.equals("air"))
-            return 0;
+    private Block getBlockForName(String name) {
+        name = name.toLowerCase().replace(' ', '_');
 
+/*
+        // old Minecraft 1.6 code that doesn't work anymore
         Item item = getItemForName(name);
         if (item == null)
             throw reader.syntaxError("unrecognized kind of block or item: '" + name + "'");
@@ -215,7 +211,12 @@ public class BasicParser {
         } else {
             throw reader.syntaxError(name + " is not a block");
         }
+*/
 
+        Block block = (Block) Block.blockRegistry.getObject(name);
+        if (block == null)
+            throw reader.syntaxError(name + " isn't any kind of block I've ever heard of");
+        return block;
     }
 
     private BasicStatement parseStatement() throws BasicException, IOException {
@@ -229,8 +230,8 @@ public class BasicParser {
             if (takeIf(","))
                 m = parseExpression();
             endOfLine();
-            int blockID = getBlockIDForName(name);
-            return new BasicStatement.Use(file(), line(), blockID, m);
+            Block block = getBlockForName(name);
+            return new BasicStatement.Use(file(), line(), block, m);
         } else if (takeIf("PLOT") || takeIf("PUT")) {
             BasicExpr x = parseExpression();
             require(",");
